@@ -83,7 +83,7 @@ public:
 
     SimpleVector& operator=(SimpleVector&& rhs) {
 
-        if (&this != &rhs) {
+        if (this != &rhs) {
 
             values_.swap(rhs.values_);
             size_ = std::move(rhs.size_);
