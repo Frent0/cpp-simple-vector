@@ -27,7 +27,7 @@ public:
     // Запрещаем копирование
     ArrayPtr(const ArrayPtr&) = delete;
 
-    ArrayPtr(ArrayPtr&& other){
+    ArrayPtr(ArrayPtr&& other) {
         swap(other);
     }
 
@@ -38,12 +38,12 @@ public:
     // Запрещаем присваивание
     ArrayPtr& operator=(const ArrayPtr&) = delete;
 
-    ArrayPtr& operator=(ArrayPtr&& other){
+    ArrayPtr& operator=(ArrayPtr&& other) {
 
-        if (&raw_ptr_ != &other) {
+        if (&this != &other) {
             swap(other);
         }
-
+        return *this;
     }
 
     // Прекращает владением массивом в памяти, возвращает значение адреса массива
