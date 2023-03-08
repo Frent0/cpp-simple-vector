@@ -3,6 +3,7 @@
 #include <cassert>
 #include <cstdlib>
 #include <algorithm>
+#include <iostream>
 
 template <typename Type>
 class ArrayPtr {
@@ -26,12 +27,24 @@ public:
     // Запрещаем копирование
     ArrayPtr(const ArrayPtr&) = delete;
 
+    ArrayPtr(ArrayPtr&& other){
+        swap(other);
+    }
+
     ~ArrayPtr() {
         delete[] raw_ptr_;
     }
 
     // Запрещаем присваивание
     ArrayPtr& operator=(const ArrayPtr&) = delete;
+
+    ArrayPtr& operator=(ArrayPtr&& other){
+
+        if (&raw_ptr_ != &other) {
+            swap(other);
+        }
+
+    }
 
     // Прекращает владением массивом в памяти, возвращает значение адреса массива
     // После вызова метода указатель на массив должен обнулиться
