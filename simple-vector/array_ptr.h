@@ -39,8 +39,8 @@ public:
     ArrayPtr& operator=(const ArrayPtr&) = delete;
 
     ArrayPtr& operator=(ArrayPtr&& other) {
-
-        if (&this != &other) {
+        
+        if (this != &other) {
             swap(other);
         }
         return *this;
