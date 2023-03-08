@@ -178,7 +178,9 @@ public:
     // Если перед вставкой значения вектор был заполнен полностью,
     // вместимость вектора должна увеличиться вдвое, а для вектора вместимостью 0 стать равной 1
     Iterator Insert(ConstIterator pos, const Type& value) {
-
+    
+    assert(pos >= begin() && pos <= end());
+    
         int distance_ = std::distance(cbegin(), pos);
 
         if (capacity_ == 0) {
@@ -221,7 +223,9 @@ public:
     }
 
     Iterator Insert(ConstIterator pos, Type&& value) {
-
+    
+     assert(pos >= begin() && pos <= end());
+    
         int distance_ = std::distance(cbegin(), pos);
 
         if (capacity_ == 0) {
@@ -272,7 +276,9 @@ public:
 
     // Удаляет элемент вектора в указанной позиции
     Iterator Erase(ConstIterator pos) {
-
+    
+    assert(pos >= begin() && pos < end());
+    
         int distance_ = std::distance(cbegin(), pos);
 
         std::move(values_.Get() + distance_ + 1, values_.Get() + size_, values_.Get() + distance_);
@@ -306,11 +312,13 @@ public:
 
     // Возвращает ссылку на элемент с индексом index
     Type& operator[](size_t index) noexcept {
+        assert(index < size_);
         return values_[index];
     }
 
     // Возвращает константную ссылку на элемент с индексом index
     const Type& operator[](size_t index) const noexcept {
+        assert(index < size_);
         return values_[index];
     }
 
